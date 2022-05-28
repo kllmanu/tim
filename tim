@@ -1,53 +1,20 @@
 #!/bin/bash
 
-tim="$(wp plugin path)/tim"
-php="<?php
-/**
- * Plugin Name:     Tim
- * Plugin URI:      https://github.com/kllmanu/tim
- * Description:     A timber context command line debugger
- * Author:          manu
- * Author URI:      https://towagmbh.slack.com/team/U038FQ8LMUJ
- */
-
-use \Timber\Timber;
-
-function tt() {
-
-}
-
-// https://timber.github.io/docs/guides/extending-timber/#adding-functionality-to-twig
-add_filter('timber/twig', function(\$twig) {
-	\$twig->addFunction(new \Timber\TwigFunction('tt', 'tt);
-	
-	return \$twig;
-});
-
-// TODO: get current page w/ template context
-add_action('shutdown', function() {
-	global \$context;
-
-	\$ctx = \$context ?? Timber::context();
-
-	file_put_contents(plugin_dir_path(__FILE__) . 'context.json', json_encode(\$ctx));
-}, 30, 0);"
-json="[{}]"
 
 function tim_install() {
-	mkdir -p $tim && cd $_
-	echo "$json" > context.json
-	echo "$php" > index.php
-	cd -
-
-	wp plugin activate tim
+	wp plugin install --activate "https://github.com/kllmanu/tim/archive/refs/heads/master.zip"
+	exit
 }
 
 function tim_uninstall() {
-	wp plugin deactivate tim
-	rm -rf $tim
+	wp plugin deactivate --uninstall tim
+	exit
 }
 
+[[ "$1" == "-i" ]] && tim_install
+[[ "$1" == "-u" ]] && tim_uninstall
 
-cat "$tim/context.json" | fx
-
-
+while true; do 
+	jless "$tim/context.json"
+	sleep 0.2
+done
