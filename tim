@@ -12,8 +12,8 @@ function tim_uninstall() {
 	exit
 }
 
-[[ "$1" == "-i" ]] && tim_install
-[[ "$1" == "-u" ]] && tim_uninstall
+[[ "$1" == "-i" || "$1" == "--install" ]] && tim_install
+[[ "$1" == "-u" || "$1" == "--uninstall"  ]] && tim_uninstall
 
 tim="$(wp plugin path --dir tim)"
 
