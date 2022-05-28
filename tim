@@ -2,6 +2,7 @@
 
 
 function tim_install() {
+	wp plugin is-installed tim && echo "Plugin already installed." && exit
 	wp plugin install --activate "https://github.com/kllmanu/tim/archive/refs/heads/master.zip"
 	exit
 }
