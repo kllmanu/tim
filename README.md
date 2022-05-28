@@ -6,7 +6,7 @@ A timber context command line debugger
 Make sure you've installed the dependencies first, on Mac OS you can do so with:
 
 ```
-brew install curl entr jq fx wp-cli
+brew install jq jless wp-cli
 ```
 
 Then `cd` into your wordpress project and run `tim --install` once.
@@ -17,7 +17,5 @@ and watch as things change while you browse your site.
 ## Dependencies
 
 - jq 
-- fx 
+- jless
 - wp-cli 
-- entr
-- curl
