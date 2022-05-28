@@ -14,6 +14,8 @@ function tim_uninstall() {
 [[ "$1" == "-i" ]] && tim_install
 [[ "$1" == "-u" ]] && tim_uninstall
 
+tim="$(wp plugin path --dir tim)"
+
 while true; do 
 	jless "$tim/context.json"
 	sleep 0.2
